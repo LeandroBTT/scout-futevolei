@@ -67,8 +67,8 @@ openpyxl
 
 Contribuição
 
-Sugestões, melhorias e PRs são bem-vindos. Ideal para atletas, técnicos, pais e analistas
-que querem trazer estatística e dados para o futevôlei.
+Sugestões, melhorias e PRs são bem-vindos. Ideal para atletas, técnicos,
+pais e analistas que querem trazer estatística e dados para o futevôlei.
 
 
 ---
