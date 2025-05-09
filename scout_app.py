@@ -1,4 +1,3 @@
-
 # Protótipo de app para marcar eventos em vídeos de jogos (como pontos, erros, fundamentos)
 # Requisitos: streamlit, opencv-python
 
@@ -10,14 +9,14 @@ import time
 
 st.title("Scout Interativo de Futevôlei")
 
-if "eventos" not in st.session_state: st.session_state.eventos = []
+if "eventos" not in st.session_state:
+    st.session_state.eventos = []
 
 uploaded_video = st.file_uploader("Envie o vídeo do jogo", type=["mp4", "mov"])
 
 if uploaded_video:
     tfile = tempfile.NamedTemporaryFile(delete=False)
     tfile.write(uploaded_video.read())
-
     cap = cv2.VideoCapture(tfile.name)
     stframe = st.empty()
 
@@ -63,7 +62,6 @@ if uploaded_video:
                 "observacoes": observacoes
             })
             st.success(f"Evento marcado aos {round(tempo, 2)} segundos")
-            marcar = False
 
         if salvar:
             df = pd.DataFrame(eventos)
