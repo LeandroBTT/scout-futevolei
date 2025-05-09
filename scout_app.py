@@ -60,12 +60,17 @@ if st.session_state.video_loaded:
             })
             st.success(f"Evento marcado aos {round(tempo, 2)} segundos")
 
-        col3, col4 = st.columns(2)
-        if col3.button("Próximo Frame"):
+        col3, col4, col5 = st.columns(3)
+
+        if col3.button("Avançar +1 Frame"):
             st.session_state.frame_n += 1
             st.rerun()
 
-        if col4.button("Exportar Planilha"):
+        if col4.button("Avançar +10 Frames"):
+            st.session_state.frame_n += 10
+            st.rerun()
+
+        if col5.button("Exportar Planilha"):
             df = pd.DataFrame(st.session_state.eventos)
             df.to_excel("Scout_Eventos_Jogo.xlsx", index=False)
             st.success("Planilha exportada como 'Scout_Eventos_Jogo.xlsx'")
