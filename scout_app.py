@@ -63,7 +63,7 @@ if st.session_state.video_loaded:
         col3, col4 = st.columns(2)
         if col3.button("Próximo Frame"):
             st.session_state.frame_n += 1
-            st.experimental_rerun()
+            st.rerun()
 
         if col4.button("Exportar Planilha"):
             df = pd.DataFrame(st.session_state.eventos)
