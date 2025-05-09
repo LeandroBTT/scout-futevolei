@@ -10,6 +10,8 @@ import time
 
 st.title("Scout Interativo de Futevôlei")
 
+if "eventos" not in st.session_state: st.session_state.eventos = []
+
 uploaded_video = st.file_uploader("Envie o vídeo do jogo", type=["mp4", "mov"])
 
 if uploaded_video:
@@ -19,7 +21,7 @@ if uploaded_video:
     cap = cv2.VideoCapture(tfile.name)
     stframe = st.empty()
 
-    eventos = []
+    eventos = st.session_state.eventos
 
     st.markdown("### Comandos para Marcar Eventos")
     col1, col2 = st.columns(2)
@@ -51,7 +53,7 @@ if uploaded_video:
 
         if marcar:
             tempo = frame_n / fps
-            eventos.append({
+            st.session_state.eventos.append({
                 "tempo_segundos": round(tempo, 2),
                 "jogador": jogador,
                 "fundamento": fundamento,
