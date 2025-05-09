@@ -62,12 +62,12 @@ if st.session_state.video_loaded:
 
         col3, col4, col5 = st.columns(3)
 
-        if col3.button("Avançar +1 Frame"):
-            st.session_state.frame_n += 1
+        if col3.button("Avançar +10 Frame"):
+            st.session_state.frame_n += 10
             st.rerun()
 
-        if col4.button("Avançar +10 Frames"):
-            st.session_state.frame_n += 10
+        if col4.button("Avançar +20 Frames"):
+            st.session_state.frame_n += 20
             st.rerun()
 
         if col5.button("Exportar Planilha"):
