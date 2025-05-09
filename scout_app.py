@@ -25,7 +25,7 @@ if uploaded_video:
     col1, col2 = st.columns(2)
 
     with col1:
-        jogador = st.selectbox("Jogador", ["Jogador 1", "Jogador 2"])
+        jogador = st.selectbox("Jogador", ["Joao", "Jojo"])
         fundamento = st.selectbox("Fundamento", ["Recepção", "Levantamento", "Ataque", "Defesa", "Saque", "Cobertura"])
         acao = st.text_input("Ação usada")
 
