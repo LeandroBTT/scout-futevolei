@@ -9,8 +9,11 @@ import time
 
 st.title("Scout Interativo de Futevôlei")
 
+# Inicializa variáveis de estado
 if "eventos" not in st.session_state:
     st.session_state.eventos = []
+if "marcar" not in st.session_state:
+    st.session_state.marcar = False
 
 uploaded_video = st.file_uploader("Envie o vídeo do jogo", type=["mp4", "mov"])
 
@@ -35,9 +38,9 @@ if uploaded_video:
         erro = st.selectbox("Erro", ["Sim", "Não"])
         observacoes = st.text_input("Observações")
 
-if "marcar" not in st.session_state: st.session_state.marcar = False
-
-if st.button("Marcar Evento Agora"): st.session_state.marcar = True
+    # Botões de ação
+    if st.button("Marcar Evento Agora"):
+        st.session_state.marcar = True
 
     salvar = st.button("Exportar Planilha")
 
@@ -53,19 +56,19 @@ if st.button("Marcar Evento Agora"): st.session_state.marcar = True
         stframe.image(frame, channels="BGR")
         time.sleep(1.0 / fps)
 
-if st.session_state.marcar:
-    tempo = frame_n / fps
-    st.session_state.eventos.append({
-        "tempo_segundos": round(tempo, 2),
-        "jogador": jogador,
-        "fundamento": fundamento,
-        "acao_usada": acao,
-        "resultado": resultado,
-        "erro": erro,
-        "observacoes": observacoes
-    })
-    st.success(f"Evento marcado aos {round(tempo, 2)} segundos")
-    st.session_state.marcar = False
+        if st.session_state.marcar:
+            tempo = frame_n / fps
+            st.session_state.eventos.append({
+                "tempo_segundos": round(tempo, 2),
+                "jogador": jogador,
+                "fundamento": fundamento,
+                "acao_usada": acao,
+                "resultado": resultado,
+                "erro": erro,
+                "observacoes": observacoes
+            })
+            st.success(f"Evento marcado aos {round(tempo, 2)} segundos")
+            st.session_state.marcar = False  # Reseta o gatilho
 
         if salvar:
             df = pd.DataFrame(eventos)
