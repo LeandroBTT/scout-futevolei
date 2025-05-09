@@ -35,7 +35,10 @@ if uploaded_video:
         erro = st.selectbox("Erro", ["Sim", "Não"])
         observacoes = st.text_input("Observações")
 
-    marcar = st.button("Marcar Evento Agora")
+if "marcar" not in st.session_state: st.session_state.marcar = False
+
+if st.button("Marcar Evento Agora"): st.session_state.marcar = True
+
     salvar = st.button("Exportar Planilha")
 
     fps = cap.get(cv2.CAP_PROP_FPS)
@@ -50,18 +53,19 @@ if uploaded_video:
         stframe.image(frame, channels="BGR")
         time.sleep(1.0 / fps)
 
-        if marcar:
-            tempo = frame_n / fps
-            st.session_state.eventos.append({
-                "tempo_segundos": round(tempo, 2),
-                "jogador": jogador,
-                "fundamento": fundamento,
-                "acao_usada": acao,
-                "resultado": resultado,
-                "erro": erro,
-                "observacoes": observacoes
-            })
-            st.success(f"Evento marcado aos {round(tempo, 2)} segundos")
+if st.session_state.marcar:
+    tempo = frame_n / fps
+    st.session_state.eventos.append({
+        "tempo_segundos": round(tempo, 2),
+        "jogador": jogador,
+        "fundamento": fundamento,
+        "acao_usada": acao,
+        "resultado": resultado,
+        "erro": erro,
+        "observacoes": observacoes
+    })
+    st.success(f"Evento marcado aos {round(tempo, 2)} segundos")
+    st.session_state.marcar = False
 
         if salvar:
             df = pd.DataFrame(eventos)
